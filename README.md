@@ -1,2 +1,0 @@
-# askbodrumdayasaniyorguzelim
-Huba huba

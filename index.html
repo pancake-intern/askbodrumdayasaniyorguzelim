@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="#" />
+</head>
+<body>
+<div class="container">
+        <div class="container inputDiv flex-column d-flex justify-content-center align-items-center p-3 mt-5">
+        
+        <form id="formMain" class="w-100 flex-column d-flex justify-content-center align-items-center">
+        <p class="fs-3 text-light">EKLEME YERİ</p>
+        <input type="text" name="input" id="input" placeholder="PLANINI YAZ." class="form-control mb-3 w-75">
+        <button id="inputButton" class="btn buttonGradient btn-lg fw-bold">
+           YAPILACAKLARA EKLE
+        </button>
+        </form>
+        </div>
+         
+        <div class="container d-flex align-items-start justify-content-center gap-5 mt-5">
+
+            <div class="container inputDiv flex-column d-flex align-items-center p-3 Lists" id="planned">
+                <h4 class="text-dark mb-3">YAPILACAKLAR</h4>
+                <ul class="list-unstyled w-100" id="planned-ul">
+                    
+                </ul>
+            </div>
+            <div class="container inputDiv flex-column d-flex align-items-center p-3 Lists" id="doingnow">
+                <h4 class="text-warning mb-3">YAPILIYOR</h4>
+                <ul class="list-unstyled w-100" id="doing-ul">
+                    
+                </ul>
+            </div>
+            <div class="container inputDiv flex-column d-flex align-items-center p-3 Lists" id="done">
+                <h4 class="text-success mb-3">BİTMİŞ OLANLAR</h4>
+                <ul class="list-unstyled w-100" id="done-ul">
+                    
+                </ul>
+            </div>
+        </div>
+        </div>
+
+
+
+
+
+
+</div>
+    
+
+
+
+
+
+
+<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>

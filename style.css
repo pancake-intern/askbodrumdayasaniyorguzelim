@@ -1,0 +1,21 @@
+body{
+    height: 100vh;
+    margin:0;
+    background: linear-gradient(to right, #4ba177, #46b8b2  , #271ea1);
+}
+
+.inputDiv{
+    height: 200px;
+    width: 70%;
+    background: linear-gradient(to right, #4b1086, #920909);
+    border-radius: 30px;
+
+}
+.buttonGradient{
+    background: linear-gradient(to right, #d9630f, #f0c20b);
+}
+.Lists{
+    min-height: 300px;
+    height: auto;
+
+}

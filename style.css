@@ -1,21 +1,37 @@
 body{
     height: 100vh;
     margin:0;
-    background: linear-gradient(to right, #4ba177, #46b8b2  , #271ea1);
+    background: linear-gradient(to right, #74b9ff, #a29bfe, #fd79a8);
 }
 
 .inputDiv{
     height: 200px;
     width: 70%;
-    background: linear-gradient(to right, #4b1086, #920909);
+    background: linear-gradient(to right, #6c5ce7, #a29bfe);
     border-radius: 30px;
 
 }
 .buttonGradient{
-    background: linear-gradient(to right, #d9630f, #f0c20b);
+    background: linear-gradient(to right, #00b894, #00cec9);
 }
 .Lists{
     min-height: 300px;
     height: auto;
 
 }
+
+/* Bootstrap bg-dark override for better color harmony */
+.bg-dark {
+    background: linear-gradient(135deg, #6c5ce7, #74b9ff) !important;
+}
+
+/* Input styling for better integration */
+#input {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #a29bfe;
+}
+
+#input:focus {
+    background: rgba(255, 255, 255, 1);
+    border-color: #6c5ce7;
+    box-shadow: 0 0 10px rgba(108, 92, 231,

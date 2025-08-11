@@ -9,7 +9,7 @@ let usersName = localStorage.getItem("userName");
 
 function showNameInput() {
     const inputContainer = document.createElement('div');
-    inputContainer.classList.add('container', 'mt-3', 'text-center');
+    inputContainer.classList.add('container', 'mt-3', 'text-center','bg-transparent');
     inputContainer.id = 'nameInputContainer';
     
     inputContainer.innerHTML = `
@@ -321,3 +321,4 @@ function addDoneFromStorage(task){
     doneList.appendChild(newLi);
     counter++;
 }
+

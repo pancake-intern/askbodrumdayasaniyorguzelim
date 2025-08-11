@@ -6,14 +6,51 @@ let doneTasks= JSON.parse(localStorage.getItem('doneTasks')) || [];
 
 
 let usersName = localStorage.getItem("userName");
+
+function showNameInput() {
+    const inputContainer = document.createElement('div');
+    inputContainer.classList.add('container', 'mt-3', 'text-center');
+    inputContainer.id = 'nameInputContainer';
+    
+    inputContainer.innerHTML = `
+        <div class="card" style="max-width: 400px; margin: 0 auto;">
+            <div class="card-body">
+                <h5 class="card-title">Hoş Geldiniz!</h5>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="tempNameInput" placeholder="Adınızı girin..." maxlength="20">
+                </div>
+                <button class="btn btn-primary" id="tempSaveBtn">Kaydet</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertBefore(inputContainer, document.body.firstChild);
+    
+    document.getElementById('tempSaveBtn').addEventListener('click', function() {
+        const name = document.getElementById('tempNameInput').value.trim();
+        if(name !== '') {
+            localStorage.setItem("userName", name);
+            inputContainer.remove();
+            addNameFromStorage();
+        }
+    });
+    
+    // Enter tuşuna basınca da kaydet
+    document.getElementById('tempNameInput').addEventListener('keypress', function(e) {
+        if(e.key === 'Enter') {
+            document.getElementById('tempSaveBtn').click();
+        }
+    });
+}
+
 if(!usersName || usersName === "") { 
-    usersName = prompt("SONRASINDA HATIRLAMAK İÇİN ADINIZI GİRİNİZ.");
-    if(usersName!==null)
-    localStorage.setItem("userName", usersName);
+    showNameInput();
 }
 
 // input=document.getElementById("input");
 // console.log(input.value);
+
+
 
 window.addEventListener("load", function() {
     plannedTasks.forEach(task => addPlannedFromStorage(task));
@@ -34,17 +71,26 @@ document.querySelector("#inputButton").addEventListener("click",function(e){
 function addNameFromStorage(){
     const userName = localStorage.getItem("userName");
     if(userName) {
-        usersName=userName;
+        usersName = userName;        
         const nameElement = document.createElement("p");
-        nameElement.textContent = `Merhaba ` + userName;
-        nameElement.classList.add("fs-5", "text-light", "mb-0");
-        const newInput=document.createElement("p");
-        newInput.classList.add("fs-3","text-light");
+        nameElement.classList.add("fs-3", "text-light", "mb-3");
         const formList = document.getElementById("formMain");
         
-        newInput.id=`nameinput`;
-        newInput.textContent="Hoşgeldin "+userName;
-        formList.insertBefore(newInput,formList.firstChild);
+        nameElement.id = "nameinput";
+        nameElement.textContent = "Hoşgeldin " + userName;
+        formList.insertBefore(nameElement, formList.firstChild);
+        
+        let deleteName = document.createElement("button");
+        deleteName.textContent = "Adımı unut.";
+        deleteName.classList.add("btn", "btn-dark", "text-danger", "btn-sm");
+        formList.appendChild(deleteName);
+        
+        deleteName.addEventListener("click", function() {
+            localStorage.removeItem("userName");
+            nameElement.remove(); // İsim elementini kaldır
+            deleteName.remove();  // Butonu kaldır
+            showNameInput();      // Input'u tekrar göster
+        });
     }
 }
 function addPlanned(task){
@@ -274,7 +320,4 @@ function addDoneFromStorage(task){
     const doneList = document.getElementById("done-ul");
     doneList.appendChild(newLi);
     counter++;
-}
-
-
 }

@@ -5,6 +5,12 @@ let doingTasks= JSON.parse(localStorage.getItem('doingTasks')) || [];
 let doneTasks= JSON.parse(localStorage.getItem('doneTasks')) || [];
 
 
+let usersName = localStorage.getItem("userName");
+if(!usersName || usersName === "") { 
+    usersName = prompt("SONRASINDA HATIRLAMAK İÇİN ADINIZI GİRİNİZ.");
+    if(usersName!==null)
+    localStorage.setItem("userName", usersName);
+}
 
 // input=document.getElementById("input");
 // console.log(input.value);
@@ -13,6 +19,7 @@ window.addEventListener("load", function() {
     plannedTasks.forEach(task => addPlannedFromStorage(task));
     doingTasks.forEach(task => addDoingFromStorage(task));
     doneTasks.forEach(task => addDoneFromStorage(task));
+    addNameFromStorage();
 });
 
 document.querySelector("#inputButton").addEventListener("click",function(e){
@@ -23,6 +30,23 @@ document.querySelector("#inputButton").addEventListener("click",function(e){
     document.getElementById("input").value='';
 });
 
+
+function addNameFromStorage(){
+    const userName = localStorage.getItem("userName");
+    if(userName) {
+        usersName=userName;
+        const nameElement = document.createElement("p");
+        nameElement.textContent = `Merhaba ` + userName;
+        nameElement.classList.add("fs-5", "text-light", "mb-0");
+        const newInput=document.createElement("p");
+        newInput.classList.add("fs-3","text-light");
+        const formList = document.getElementById("formMain");
+        
+        newInput.id=`nameinput`;
+        newInput.textContent="Hoşgeldin "+userName;
+        formList.insertBefore(newInput,formList.firstChild);
+    }
+}
 function addPlanned(task){
     if(task.length<1) return;
     plannedTasks.push(task);
@@ -252,3 +276,5 @@ function addDoneFromStorage(task){
     counter++;
 }
 
+
+}

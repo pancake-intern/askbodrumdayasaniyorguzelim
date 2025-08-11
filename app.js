@@ -179,6 +179,10 @@ function addDoingFromStorage(task){
     const taskText = document.createElement("span");
     taskText.textContent = task;
     
+    const backButton = document.createElement("button");
+    backButton.innerHTML = "←";
+    backButton.classList.add("btn", "btn-warning", "btn-sm");
+    
     const tickButton = document.createElement("button");
     tickButton.innerHTML = "✓";
     tickButton.classList.add("btn", "btn-success", "btn-sm");
@@ -190,7 +194,16 @@ function addDoingFromStorage(task){
         addDone(task);
         newLi.remove();
     });
+
+    backButton.addEventListener("click",function(e){
+        const index= doingTasks.indexOf(task);
+        doingTasks.splice(index,1);
+        localStorage.setItem('doingTasks',JSON.stringify(doingTasks));
+        addPlanned(task);
+        newLi.remove();
+    });
     
+    newLi.appendChild(backButton);
     newLi.appendChild(taskText);
     newLi.appendChild(tickButton);
     
@@ -204,6 +217,10 @@ function addDoneFromStorage(task){
     newLi.classList.add("mb-2", "p-2", "bg-success","text-light", "rounded", "d-flex", "justify-content-between", "align-items-center");
     newLi.id = `doneButton${counter}`;
     
+    const backButton = document.createElement("button");
+    backButton.innerHTML = "←";
+    backButton.classList.add("btn", "btn-warning", "btn-sm");
+    
     const taskText = document.createElement("span");
     taskText.textContent = task;
     
@@ -211,8 +228,6 @@ function addDoneFromStorage(task){
     deleteButton.innerHTML = "✗";
     deleteButton.classList.add("btn", "btn-danger", "btn-sm");
 
-    
-    
     deleteButton.addEventListener("click", function(e) {
         const index = doneTasks.indexOf(task);
         doneTasks.splice(index, 1);
@@ -220,6 +235,15 @@ function addDoneFromStorage(task){
         newLi.remove();
     });
     
+    backButton.addEventListener("click",function(e){
+        const index= doneTasks.indexOf(task);
+        doneTasks.splice(index,1);
+        localStorage.setItem('doneTasks',JSON.stringify(doneTasks));
+        addDoing(task);
+        newLi.remove();
+    });
+    
+    newLi.appendChild(backButton);
     newLi.appendChild(taskText);
     newLi.appendChild(deleteButton);
     

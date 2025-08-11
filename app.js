@@ -5,11 +5,15 @@ let doingTasks= JSON.parse(localStorage.getItem('doingTasks')) || [];
 let doneTasks= JSON.parse(localStorage.getItem('doneTasks')) || [];
 
 
-let usersName = localStorage.getItem("userName");
 if(!usersName || usersName === "") { 
-    usersName = prompt("SONRASINDA HATIRLAMAK İÇİN ADINIZI GİRİNİZ.");
-    if(usersName!==null)
-    localStorage.setItem("userName", usersName);
+    // prompt yerine showNameInput fonksiyonunu çağır
+    showNameInput();
+} else {
+    // Eğer isim zaten varsa, sayfa yüklendiğinde göster
+    window.addEventListener("load", function() {
+        addNameFromStorage();
+        // diğer yükleme işlemleri...
+    });
 }
 
 // input=document.getElementById("input");
@@ -31,21 +35,36 @@ document.querySelector("#inputButton").addEventListener("click",function(e){
 });
 
 
-function addNameFromStorage(){
-    const userName = localStorage.getItem("userName");
-    if(userName) {
-        usersName=userName;
-        const nameElement = document.createElement("p");
-        nameElement.textContent = `Merhaba ` + userName;
-        nameElement.classList.add("fs-5", "text-light", "mb-0");
-        const newInput=document.createElement("p");
-        newInput.classList.add("fs-3","text-light");
+function showNameInput() {
+    const inputContainer = document.createElement('div');
+    inputContainer.classList.add('container', 'mt-3', 'text-center');
+    inputContainer.id = 'nameInputContainer';
+    
+    inputContainer.innerHTML = `
+        <div class="card">
+            <div class="card-body">
+                <h5>Hoş Geldiniz!</h5>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="tempNameInput" placeholder="Adınızı girin...">
+                </div>
+                <button class="btn btn-primary" id="tempSaveBtn">Kaydet</button>
+            </div>
+        </div>
+    `;
+    
         const formList = document.getElementById("formMain");
-        
-        newInput.id=`nameinput`;
-        newInput.textContent="Hoşgeldin "+userName;
-        formList.insertBefore(newInput,formList.firstChild);
-    }
+        formList.insertBefore(inputContainer,formList.firstChild);
+   
+    
+    
+    document.getElementById('tempSaveBtn').addEventListener('click', function() {
+        const name = document.getElementById('tempNameInput').value.trim();
+        if(name !== '') {
+            localStorage.setItem("userName", name);
+            inputContainer.remove(); // Input'u kaldır
+            addNameFromStorage(); // İsmi sayfaya ekle
+        }
+    });
 }
 function addPlanned(task){
     if(task.length<1) return;
@@ -278,3 +297,4 @@ function addDoneFromStorage(task){
 
 
 }
+
